@@ -1,0 +1,146 @@
+:root{
+  /* Palette: subtle & classic */
+  --bg: #F9F6F1;           /* warm cream */
+  --panel: #FFFFFF;        /* panels / cards */
+  --muted-text: #333333;   /* primary text */
+  --muted-secondary: #6B6360; /* secondary text / captions */
+  --board-line: #D8D3CC;   /* board lines */
+  --accent-x: #22313F;     /* muted navy for X */
+  --accent-o: #6E3A36;     /* muted burgundy for O */
+  --shadow: rgba(34,49,63,0.06);
+  --radius: 8px;
+  --gap: 12px;
+  --max-width: 560px;
+}
+
+/* Page base */
+html,body{
+  height:100%;
+  margin:0;
+  background:var(--bg);
+  color:var(--muted-text);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  font-size:16px;
+}
+
+/* Page layout helpers */
+.app {
+  max-width: var(--max-width);
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.header h1{
+  margin:0;
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--muted-text);
+  letter-spacing: 0.2px;
+}
+.header p {
+  margin:6px 0 0;
+  color: var(--muted-secondary);
+  font-size:0.95rem;
+}
+
+/* Game board */
+.board {
+  width:100%;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--gap);
+  background: transparent;
+  padding: var(--gap);
+  box-sizing: border-box;
+}
+
+.cell {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(250,246,241,0.6));
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--board-line);
+  box-shadow: 0 4px 8px var(--shadow);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-weight: 600;
+  color: var(--muted-text);
+}
+
+/* Slight press animation */
+.cell:active { transform: translateY(1px) scale(0.998); box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+
+.cell:hover {
+  background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(250,246,241,0.75));
+}
+
+/* Colors for X and O */
+.cell.x { color: var(--accent-x); }
+.cell.o { color: var(--accent-o); }
+
+/* Highlight winning cells (subtle) */
+.cell.winner {
+  box-shadow: 0 6px 18px rgba(34,49,63,0.08);
+  transform: translateY(-2px);
+  border-color: rgba(34,49,63,0.07);
+}
+
+/* Controls & status */
+.controls {
+  margin-top: 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.status {
+  color:var(--muted-secondary);
+  font-size:0.95rem;
+}
+
+/* Buttons: subtle classic look */
+.btn {
+  background: transparent;
+  border: 1px solid rgba(34,49,63,0.08);
+  color: var(--muted-text);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor:pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+  font-family: inherit;
+}
+.btn.primary {
+  background: rgba(34,49,63,0.06);
+  border-color: rgba(34,49,63,0.09);
+  color: var(--muted-text);
+}
+.btn:hover { background: rgba(34,49,63,0.04); }
+
+/* Footer / small screens */
+.footer {
+  margin-top: 22px;
+  text-align:center;
+  color:var(--muted-secondary);
+  font-size:0.9rem;
+}
+
+/* Responsiveness */
+@media (max-width:420px){
+  .app { padding:12px; margin:20px auto; }
+  .header h1 { font-size:1.2rem; }
+  .controls { flex-direction:column; align-items:stretch; gap:8px; }
+}
